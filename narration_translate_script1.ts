@@ -1,4 +1,5 @@
-var fs = require("fs");
+import * as fs from "fs";
+import { exit } from "process";
 
 var titles = ["One-on-One Time – Babies",
     "One-on-One Time - Children",
@@ -37,7 +38,18 @@ var titles = ["One-on-One Time – Babies",
 var titlesMap = {};
 titles.forEach((title) => { titlesMap[title] = true; });
 
-var documentContents = fs.readFileSync("input.txt").toString();
+if (!fs.existsSync("./input")) {
+    fs.mkdirSync("input");
+}
+
+var documentContents = "";
+try {
+    documentContents = fs.readFileSync("./input/input.txt").toString();
+} catch (ex) {
+    console.log("Failed to load ./input/input.txt");
+    console.log("Please make sure your input to this script is in a folder called input, and is itself a file called input.txt");
+    exit(1);
+}
 
 var linesByTitle: { [title: string]: { duration: string, lines: string[] } } = {};
 
@@ -64,7 +76,7 @@ var translateArray: { sourceText: string, text: string, note: string, topicTitle
 titles.forEach((title) => {
     if (linesByTitle[title]) {
         linesByTitle[title].duration = linesByTitle[title].lines[0];
-        linesByTitle[title].lines = linesByTitle[title].lines.slice(1);
+        linesByTitle[title].lines = linesByTitle[title].lines;
         linesByTitle[title].lines.forEach((line) => {
             translateArray.push({
                 sourceText: line,
@@ -83,7 +95,7 @@ var narrationArray: { id: string, text: string, type: "video" | "audio" }[] = []
 titles.forEach((title) => {
     if (linesByTitle[title]) {
         linesByTitle[title].duration = linesByTitle[title].lines[0];
-        var paragraphText = linesByTitle[title].lines.slice(1).join("\n");
+        var paragraphText = linesByTitle[title].lines.join("\n");
         narrationArray.push({
             text: paragraphText,
             id: title,
@@ -94,8 +106,12 @@ titles.forEach((title) => {
     }
 });
 
-fs.writeFileSync("./narration_map.json", JSON.stringify(linesByTitle, null, 4));
+if (!fs.existsSync("./output")) {
+    fs.mkdirSync("./output");
+}
 
-fs.writeFileSync("./narration_list.json", JSON.stringify(narrationArray, null, 4));
+fs.writeFileSync("./output/narration_map.json", JSON.stringify(linesByTitle, null, 4));
 
-fs.writeFileSync("./translation_list.json", JSON.stringify(translateArray, null, 4));
+fs.writeFileSync("./output/narration_list.json", JSON.stringify(narrationArray, null, 4));
+
+fs.writeFileSync("./output/translation_list.json", JSON.stringify(translateArray, null, 4));
