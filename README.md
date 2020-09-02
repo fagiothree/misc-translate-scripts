@@ -6,3 +6,6 @@ If a new title (topic) gets added to the input.txt you have to add that title to
 
 Run ```yarn install``` to install packages needed to run the script
 Run ```npm run narration-from-txt``` to extract the voiceover text from the txt file and put it into JSON files in the output folder.
+
+The narration_list.json file in the output folder is the one that needs to be uploaded to https://idems-media-recorder.web.app/ 
+Uploading to the IDEMS media recorder currently requires manually removing things from a Firebase database. Please contact David Stern or Chris Clarke for this.
