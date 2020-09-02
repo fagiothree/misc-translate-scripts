@@ -76,7 +76,7 @@ var translateArray: { sourceText: string, text: string, note: string, topicTitle
 titles.forEach((title) => {
     if (linesByTitle[title]) {
         linesByTitle[title].duration = linesByTitle[title].lines[0];
-        linesByTitle[title].lines = linesByTitle[title].lines;
+        linesByTitle[title].lines = linesByTitle[title].lines.slice(1);
         linesByTitle[title].lines.forEach((line) => {
             translateArray.push({
                 sourceText: line,
