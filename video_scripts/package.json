@@ -1,0 +1,24 @@
+{
+  "name": "misc-translate-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "narration-from-txt": "ts-node narration_translate_script1.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IDEMSInternational/misc-translate-scripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IDEMSInternational/misc-translate-scripts/issues"
+  },
+  "homepage": "https://github.com/IDEMSInternational/misc-translate-scripts#readme",
+  "dependencies": {
+    "typescript": "^4.0.2",
+    "ts-node": "^8.10.2",
+    "@types/node": "^14.6.0"
+  }
+}
