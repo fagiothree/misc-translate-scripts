@@ -34,7 +34,8 @@ var titles = ["One-on-One Time – Babies",
     "Child Development - Introduction",
     "Child Development - Babies & toddlers (0 - 2 years)",
     "Child Development - Children (2 - 9 years)",
-    "Child Development - Teenagers (10 - 17 years)"];
+    "Child Development - Teenagers (10 - 17 years)",
+    "Helping your children learn"];
 var titlesMap = {};
 titles.forEach((title) => { titlesMap[title] = true; });
 
