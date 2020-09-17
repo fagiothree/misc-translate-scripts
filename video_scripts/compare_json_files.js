@@ -1,12 +1,21 @@
 var fs = require('fs');
 var path = require("path");
 
+
+
 var input_path_new = path.join(__dirname, "output/translation_list.json");
 var input_path_old = path.join(__dirname, "output/old_translation_list.json");
-
 var output_path = path.join(__dirname, "output/translation_changes.json");
 
-var identifiers = ["sourceText","topicTitle"];
+
+/*
+var input_path_new = path.join(__dirname, "output/narration_list.json");
+var input_path_old = path.join(__dirname, "output/old_narration_list.json");
+var output_path = path.join(__dirname, "output/narration_changes.json");
+*/
+
+var identifiers = ["sourceText","topicTitle"]; // translation
+//var identifiers = ["id"]; // narration
 var key_value = "text";
 
 
@@ -29,10 +38,14 @@ function compare_json_files(input_path_new, input_path_old,output_path,identifie
                 }
             }
                 return true; });
+               
+
         if (same_obj.length == 0){
             changes.push(Object.assign({}, curr_new_obj));
         } else if (same_obj.length == 1){
-            if (!same_obj[0][key_value] == curr_new_obj[key_value]){
+           
+            if (!(same_obj[0][key_value] == curr_new_obj[key_value])){
+                
                 changes.push(Object.assign({}, curr_new_obj)); 
             }
 
